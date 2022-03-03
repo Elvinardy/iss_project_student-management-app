@@ -47,6 +47,7 @@
 
                     <form [formGroup]="form" (ngSubmit)="onAddAttendance()">
                     <label for="attendance">Attendance:  </label>
+                    <input type="hidden" formControlName="id" value="{{ stud?.id }}">
                     <select formControlName="atdInfo">
                       <option value="present" selected>Present</option>
                       <option value="absent">Absent</option>

@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AttendanceService } from '../attendance.service';
 import { Attendance, Student } from '../student';
 import { StudentService } from '../student.service';
 
@@ -22,13 +21,14 @@ export class MainComponent implements OnInit, OnDestroy {
   form!: FormGroup;
 
 
-  constructor(private studentService: StudentService, private attendanceService: AttendanceService,
+  constructor(private studentService: StudentService,
     private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getStudents();
     const now = (new Date()).toISOString().split('T')[0];
     this.form = this.fb.group({
+      id: this.fb.control(''),
       date: this.fb.control(now),
       atdInfo: this.fb.control('present'),
     })
@@ -79,7 +79,7 @@ export class MainComponent implements OnInit, OnDestroy {
   onAddAttendance() {
     const attd = this.form.value as Attendance;
     // this.students.push(id);
-    this.attendanceService.postAttendance(attd)
+    this.studentService.postAttendance(attd)
       .then(() => console.log(attd))
       .catch(err => alert(err));
   }

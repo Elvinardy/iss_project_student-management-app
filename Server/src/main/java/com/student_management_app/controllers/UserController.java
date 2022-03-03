@@ -1,4 +1,4 @@
-package com.student_management_app.controllers;
+/* package com.student_management_app.controllers;
 
 import com.student_management_app.model.JwtRequest;
 import com.student_management_app.model.JwtResponse;
@@ -55,4 +55,4 @@ public class UserController {
                 
     }
     
-}
+} */

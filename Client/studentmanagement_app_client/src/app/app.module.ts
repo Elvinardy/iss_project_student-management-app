@@ -10,7 +10,6 @@ import { MainComponent } from './components/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddComponent } from './components/add.component';
 import { LoginComponent } from './components/login.component';
-import { AttendanceService } from './attendance.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import { AttendanceService } from './attendance.service';
     HttpClientModule,
     FormsModule, ReactiveFormsModule, NgbModule
   ],
-  providers: [StudentService, AttendanceService],
+  providers: [StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

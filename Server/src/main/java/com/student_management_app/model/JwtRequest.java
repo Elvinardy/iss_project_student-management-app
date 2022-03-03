@@ -1,4 +1,4 @@
-package com.student_management_app.model;
+/* package com.student_management_app.model;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -24,3 +24,4 @@ public class JwtRequest {
 
     
 }
+ */

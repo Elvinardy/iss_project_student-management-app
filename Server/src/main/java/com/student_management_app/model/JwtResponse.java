@@ -1,4 +1,4 @@
-package com.student_management_app.model;
+/* package com.student_management_app.model;
 
 public class JwtResponse {
 
@@ -18,3 +18,4 @@ public class JwtResponse {
     
     
 }
+ */

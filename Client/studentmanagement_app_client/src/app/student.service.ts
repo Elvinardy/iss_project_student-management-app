@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Student } from './student';
+import { Attendance, Student } from './student';
 
 @Injectable()
 export class StudentService {
@@ -25,5 +25,9 @@ export class StudentService {
 
   public deleteStudent(studentId: number): Observable<void> {
   return this.http.delete<void>(`/student/delete/${studentId}`);
+}
+
+postAttendance(attendance: Attendance): Promise<void> {
+  return lastValueFrom(this.http.post<void>('student/attendance', attendance));
 }
 }

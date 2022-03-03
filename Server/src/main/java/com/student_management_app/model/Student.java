@@ -29,6 +29,7 @@ public class Student implements Serializable {
     private String studentCode;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+  //  @JoinColumn(name = "fk_student_id", referencedColumnName = "")
     private Set<Attendance> attendance;
 
     // Empty Constructor
