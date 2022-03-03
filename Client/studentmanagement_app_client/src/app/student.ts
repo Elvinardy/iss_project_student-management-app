@@ -8,3 +8,9 @@ export interface Student {
   imageUrl: string;
   studentCode: string;
 }
+
+export interface Attendance {
+  date : number;
+  atdInfo : number;
+  id? : number;
+}

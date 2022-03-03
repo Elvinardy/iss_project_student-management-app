@@ -12,13 +12,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StudentService {
-    
-    private final StudentRepository studentRepo;
-
-    @Autowired  // use this repo to do all the CRUD operations
-    public StudentService(StudentRepository studentRepo) {
-        this.studentRepo = studentRepo;
-    }
+   
+    @Autowired
+    private StudentRepository studentRepo;
+    // use this repo to do all the CRUD operations
 
     public Student addStudent(Student student) {
         student.setStudentCode(UUID.randomUUID().toString().substring(0,6));

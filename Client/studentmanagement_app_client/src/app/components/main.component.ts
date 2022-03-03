@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Student } from '../student';
+import { AttendanceService } from '../attendance.service';
+import { Attendance, Student } from '../student';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -12,22 +14,33 @@ import { StudentService } from '../student.service';
 })
 export class MainComponent implements OnInit, OnDestroy {
 
-  public students: Student[] = [];
-  public editStudent!: Student;
-  public deleteStudent!: Student;
-  subscription!: Subscription;
+  students: Student[] = [];
+  attendance: Attendance[] =[];
+  editStudent!: Student;
+  deleteStudent!: Student;
+  subscription!: Subscription
+  form!: FormGroup;
 
-  constructor(private studentService: StudentService, private router: Router) { }
+
+  constructor(private studentService: StudentService, private attendanceService: AttendanceService,
+    private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getStudents();
+    const now = (new Date()).toISOString().split('T')[0];
+    this.form = this.fb.group({
+      date: this.fb.control(now),
+      atdInfo: this.fb.control('present'),
+    })
   }
+
 
   public getStudents(): void {
     document.getElementById('add-student-form')?.click();
     this.subscription = this.studentService.getStudents().subscribe({
       next:(response: Student[]) => {
         this.students = response;
+        console.log(response);
       },
       error:(error: HttpErrorResponse) => {
           alert(error.message);
@@ -62,6 +75,17 @@ export class MainComponent implements OnInit, OnDestroy {
     });
     this.router.navigate(['/']);
   }
+
+  onAddAttendance() {
+    const attd = this.form.value as Attendance;
+    // this.students.push(id);
+    this.attendanceService.postAttendance(attd)
+      .then(() => console.log(attd))
+      .catch(err => alert(err));
+  }
+
+
+
   // for search function
   public searchStudents(key: String): void {
     console.log(key);
@@ -70,8 +94,8 @@ export class MainComponent implements OnInit, OnDestroy {
       // if not equal to -1, means the key present
       if (student.name.toLowerCase().indexOf(key.toLowerCase()) != -1
       || student.email.toLowerCase().indexOf(key.toLowerCase()) != -1
-      || student.phone.toLowerCase().indexOf(key.toLowerCase()) != -1
-      || student.classInfo.toLowerCase().indexOf(key.toLowerCase()) != -1) {
+      || student.phone.toLowerCase().indexOf(key.toLowerCase()) != -1)
+       {
         results.push(student);
       }
     }

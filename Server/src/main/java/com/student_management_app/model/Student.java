@@ -1,15 +1,19 @@
 package com.student_management_app.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-
+@Table(name = "student")
 public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +25,11 @@ public class Student implements Serializable {
     private String remarks;
     private String phone;
     private String imageUrl;
+    @Column(nullable = false, updatable = false)
     private String studentCode;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private Set<Attendance> attendance;
 
     // Empty Constructor
     public Student() { }
@@ -87,6 +95,14 @@ public class Student implements Serializable {
     public void setStudentCode(String studentCode) {
         this.studentCode = studentCode;
     }
+
+ /*    public Set<Attendance> getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Set<Attendance> attendance) {
+        this.attendance = attendance;
+    } */
 
     @Override
     public String toString() {

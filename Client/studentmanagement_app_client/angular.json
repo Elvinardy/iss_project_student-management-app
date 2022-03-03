@@ -93,10 +93,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "studentmanagement_app_client:build:production"
+              "browserTarget": "studentmanagement_app_client:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "studentmanagement_app_client:build:development"
+              "browserTarget": "studentmanagement_app_client:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

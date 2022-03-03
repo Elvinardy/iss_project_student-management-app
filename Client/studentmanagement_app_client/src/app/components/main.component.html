@@ -44,11 +44,19 @@
                         <a (click)="onOpenModal('delete', stud)" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
                     </div>
                     <hr>
-                    <label for="attendance">Attendance: </label>
-                    <ul class="social-links list-inline mb-0">
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" href="" data-original-title="present"><i class="fa fa-check"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="absent"><i class="fa fa-times"></i></a></li>
-                    </ul>
+
+                    <form [formGroup]="form" (ngSubmit)="onAddAttendance()">
+                    <label for="attendance">Attendance:  </label>
+                    <select formControlName="atdInfo">
+                      <option value="present" selected>Present</option>
+                      <option value="absent">Absent</option>
+                      <option value="validReason">Valid-Reason</option>
+                    </select>
+                    <br>
+                      <label for="date">Date:   </label>
+                      <input type="date" formControlName="date">
+                      <button type="submit">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
