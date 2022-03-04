@@ -1,4 +1,4 @@
-/* package com.student_management_app.utility;
+package com.student_management_app.utility;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +16,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JWTutility implements Serializable {
     
-    private static final long serialVersionUID = 234234523523L;
+    private static final String SECRET_KEY = "student_app";
 
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 3600 * 5;
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+   /*  @Value("${jwt.secret}")
+    private String secretKey; */
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
@@ -34,7 +33,7 @@ public class JWTutility implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-
+    // get the token when it is ready
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
@@ -43,7 +42,7 @@ public class JWTutility implements Serializable {
 
     //for retrieving any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
 
@@ -57,7 +56,14 @@ public class JWTutility implements Serializable {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+      // return doGenerateToken(claims, userDetails.getUsername());
+       return Jwts.builder()
+            .setClaims(claims)
+            .setSubject(userDetails.getUsername())
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+            .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+            .compact();
     }
 
 
@@ -67,9 +73,9 @@ public class JWTutility implements Serializable {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secretKey).compact();
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
     }
-
+ 
 
     //validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
@@ -78,4 +84,3 @@ public class JWTutility implements Serializable {
     }
 }
 
- */

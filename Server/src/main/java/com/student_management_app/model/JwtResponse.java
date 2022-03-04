@@ -1,11 +1,21 @@
-/* package com.student_management_app.model;
+package com.student_management_app.model;
 
 public class JwtResponse {
 
+    private User user;
     private String jwtToken;
 
-    public JwtResponse(String jwtToken) {
+    public JwtResponse(User user, String jwtToken) {
+        this.user = user;
         this.jwtToken = jwtToken;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getJwtToken() {
@@ -18,4 +28,3 @@ public class JwtResponse {
     
     
 }
- */

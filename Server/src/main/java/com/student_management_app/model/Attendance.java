@@ -36,8 +36,7 @@ public class Attendance implements Serializable {
     public Attendance() {
     }
 
-    public Attendance(Student student, Date date, AtdInfo atdInfo) {
-        this.student = student;
+    public Attendance(Date date, AtdInfo atdInfo) {
         this.date = date;
         this.atdInfo = atdInfo;
     }
@@ -58,13 +57,13 @@ public class Attendance implements Serializable {
         this.atdId = atdId;
     }
 
-    public Student getStudent() {
+ /*    public Student getStudent() {
         return student;
     }
 
     public void setStudent(Student student) {
         this.student = student;
-    }
+    } */
 
     public AtdInfo getAtdInfo() {
         return atdInfo;

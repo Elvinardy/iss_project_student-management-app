@@ -1,4 +1,4 @@
-/* package com.student_management_app.filter;
+package com.student_management_app.filter;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.student_management_app.service.UserService;
+import com.student_management_app.service.JwtService;
 import com.student_management_app.utility.JWTutility;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -25,41 +27,46 @@ public class JwtFilter extends OncePerRequestFilter {
     private JWTutility jwtUtility;
 
     @Autowired
-    private UserService userSvc;
-
+    private JwtService jwtService;
     
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        
-                String authorization = request.getHeader("Authorization");
-                String token = null;
-                String userName = null;
+       
+        final String header = request.getHeader("Authorization");
+            String jwtToken = null;
+            String userName = null;
+        if (header != null && header.startsWith("Bearer ")) {
 
-                if(null != authorization && authorization.startsWith("Bearer ")) {
-                    token = authorization.substring(7);
-                    userName = jwtUtility.getUsernameFromToken(token);
-                }
+            jwtToken = header.substring(7);
 
-                if(null != userName && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    UserDetails userDetails
-                            = userSvc.loadUserByUsername(userName);
+            try {
+                userName = jwtUtility.getUsernameFromToken(jwtToken);
 
-                    if(jwtUtility.validateToken(token, userDetails)) {
-                        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-  
-                                = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Unable to get jwt token.");
+            } catch (ExpiredJwtException e) {
+                System.out.println("Jwt token is expired.");
+            }
+        } else {
+            System.out.println("Jwt Token does not start with Bearer!");
+        }
+        if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = jwtService.loadUserByUsername(userName);
 
-                        usernamePasswordAuthenticationToken.setDetails(
-                            new WebAuthenticationDetailsSource().buildDetails(request)
-                        );
+            if(jwtUtility.validateToken(jwtToken, userDetails)) {
 
-                        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                    }
-                    filterChain.doFilter(request, response);
-                }
-        
-    }
+               UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = 
+               new UsernamePasswordAuthenticationToken(userDetails, null, 
+                                userDetails.getAuthorities());
+                
+                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+
+            }
+        }
     
+            filterChain.doFilter(request, response);
+    }
 }
- */

@@ -1,19 +1,15 @@
-/* package com.student_management_app.model;
+package com.student_management_app.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
 public class JwtRequest {
     
-    private String username;
+    private String userName;
     private String password;
+
     public String getUsername() {
-        return username;
+        return userName;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public String getPassword() {
         return password;
@@ -21,7 +17,15 @@ public class JwtRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public JwtRequest(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+    public JwtRequest() {
+    }
 
     
+    
 }
- */
+ 

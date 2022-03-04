@@ -25,11 +25,10 @@ public class Student implements Serializable {
     private String remarks;
     private String phone;
     private String imageUrl;
-    @Column(nullable = false, updatable = false)
+    @Column(name= "student_code", nullable = false, updatable = false)
     private String studentCode;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-  //  @JoinColumn(name = "fk_student_id", referencedColumnName = "")
     private Set<Attendance> attendance;
 
     // Empty Constructor
@@ -97,13 +96,13 @@ public class Student implements Serializable {
         this.studentCode = studentCode;
     }
 
- /*    public Set<Attendance> getAttendance() {
+    public Set<Attendance> getAttendance() {
         return attendance;
     }
 
     public void setAttendance(Set<Attendance> attendance) {
         this.attendance = attendance;
-    } */
+    }
 
     @Override
     public String toString() {

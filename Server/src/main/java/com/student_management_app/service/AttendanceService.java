@@ -3,6 +3,7 @@ package com.student_management_app.service;
 import java.util.Optional;
 
 import com.student_management_app.model.Attendance;
+import com.student_management_app.model.Student;
 import com.student_management_app.repository.AttendanceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ public class AttendanceService {
     @Autowired
     private AttendanceRepository attRepo;
 
-    public Optional<Integer> addAttendance(Attendance attendance) {
+    public Optional<Integer> addAttendance(Attendance attendance, Student student) {
 
-        attRepo.insertAttendance(attendance);
+        attRepo.insertAttendance(attendance, student);
         return Optional.empty();
     }
     }
