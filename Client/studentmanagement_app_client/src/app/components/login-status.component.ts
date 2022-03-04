@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginStatusComponent implements OnInit {
   isAuthenticated: boolean = false;
   userFullName?: string;
 
-  constructor(private oktaAuthService: OktaAuthService) { }
+  constructor(private oktaAuthService: OktaAuthService, private router: Router) { }
 
   ngOnInit(): void {
     // subscribe to authentication state
@@ -19,6 +20,8 @@ export class LoginStatusComponent implements OnInit {
       (result) => {
         this.isAuthenticated = result;
         this.getUserDetails();
+        this.router.navigate(['/teachers']);
+
       })
    }
         getUserDetails() {

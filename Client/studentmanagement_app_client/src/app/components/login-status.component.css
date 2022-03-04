@@ -11,12 +11,34 @@
   background: orange;
   margin: 0;
   position: absolute;
-  top: 5%;
+  top: 7%;
   left: 80%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  -ms-transform: translateY(30%);
+  transform: translateY(30%);
+  -ms-transform: translateX(-200%);
+    transform: translateX(-200%);
 
   }
+
+  .security-btn-ml-1{
+    position:relative;
+    right:0;
+    min-width:95px;
+    color:#fff;
+    border:10px solid #8feb18;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:43px;
+    background: orange;
+    margin: 0;
+    position: absolute;
+    top: 5%;
+    left: 80%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+
+    }
 
 .login-status-header{
   display:-webkit-box;

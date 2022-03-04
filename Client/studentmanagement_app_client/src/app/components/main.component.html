@@ -1,145 +1,135 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" style="color:white;">Student Management App</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarColor02">
-     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-           <button class="btn btn-danger"[routerLink]="['/add']" (click)="navigateToAdd()">Add New Student</button>
-        </li>
-     </ul>
-     <form class="form-inline my-2 my-lg-0">
-        <input type="search" (ngModelChange)="searchStudents(key.value)" #key="ngModel" ngModel
-         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search ..." required>
-     </form>
-  </div>
-</nav>
-<br>
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container" id="main-container">
-    <div class="row">
-      <!--creating a number of cards according to the number of students added or deleted-->
-        <div *ngFor="let stud of students" class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
-                <div class="card-body row">
-                    <div class="col-6">
-                      <!--? for safe naviagation-->
-                        <a href=""><img src="{{ stud?.imageUrl }}" alt="" class="img-fluid rounded-circle w-60"></a>
-                    </div>
-                    <div class="col-6 card-title align-self-center mb-0">
-                        <h5>{{ stud?.name }}</h5>
-                        <p class="m-0">{{ stud?.classInfo }}</p>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><i class="fa fa-envelope float-right"></i> Email : <a href="#">{{ stud.email }}</a></li>
-                  <li class="list-group-item"><i class="fa fa-phone float-right"></i> Phone : {{ stud.phone }}</li>
-                  <li class="list-group-item"><i class="fa fa-info-circle"></i> Remarks : {{ stud.remarks }}</li>
-              </ul>
-                <div class="card-body">
-                    <div class="float-right btn-group btn-group-sm">
-                        <a (click)="onOpenModal('edit', stud)" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a (click)="onOpenModal('delete', stud)" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                    </div>
-                    <hr>
-
-                    <form [formGroup]="form" (ngSubmit)="onAddAttendance()">
-                    <label for="attendance">Attendance:  </label>
-                    <input type="hidden" formControlName="id" value="{{ stud?.id }}">
-                    <select formControlName="atdInfo">
-                      <option value="present" selected>Present</option>
-                      <option value="absent">Absent</option>
-                      <option value="validReason">Valid-Reason</option>
-                    </select>
-                    <br>
-                      <label for="date">Date:   </label>
-                      <input type="date" formControlName="date">
-                      <button type="submit">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" style="color:white;">Student Management App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+       <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+          </li>
+       </ul>
     </div>
-</div>
+  </nav>
+  <br>
 
-<!-- Add Student Modal -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <div class="container" id="main-container">
+      <div class="row">
+        <!--creating a number of cards according to the number of students added or deleted-->
+          <div *ngFor="let stud of students" class="col-md-6 col-xl-3">
+              <div class="card m-b-30">
+                  <div class="card-body row">
+                      <div class="col-6">
+                        <!--? for safe naviagation-->
+                          <a href=""><img src="{{ stud?.imageUrl }}" alt="" class="img-fluid rounded-circle w-60"></a>
+                      </div>
+                      <div class="col-6 card-title align-self-center mb-0">
+                          <h5>{{ stud?.name }}</h5>
+                          <p class="m-0">{{ stud?.classInfo }}</p>
+                      </div>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i> Email : <a href="#">{{ stud.email }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i> Phone : {{ stud.phone }}</li>
+                    <li class="list-group-item"><i class="fa fa-info-circle"></i> Remarks : {{ stud.remarks }}</li>
+                </ul>
+                  <div class="card-body">
 
-<!-- Update Student Modal -->
-<div class="modal fade" id="updateStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-     <div class="modal-header">
-        <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Student {{editStudent?.name}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-     </div>
-     <div class="modal-body">
-        <form #editForm="ngForm">
-           <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" ngModel="{{editStudent?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
-           </div>
-           <input type="hidden" ngModel="{{editStudent?.id}}" name="id" class="form-control" id="id" placeholder="Email">
-           <input type="hidden" ngModel="{{editStudent?.studentCode}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
-           <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" ngModel="{{editStudent?.email}}" name="email" class="form-control" id="email" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label for="Info">Class Info</label>
-              <input type="text" ngModel="{{editStudent?.classInfo}}" name="classInfo" class="form-control" id="jobTitle" placeholder="Info on this student">
-           </div>
-           <div class="form-group">
-              <label for="phone">Phone</label>
-              <input type="text" ngModel="{{editStudent?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
-           </div>
-           <div class="form-group">
-              <label for="imageUrl">Image URL</label>
-              <input type="text" ngModel="{{editStudent?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
-           </div>
-           <div class="form-group">
-            <label for="remarks">Remarks:</label>
-            <textarea type="text" ngModel="{{ editStudent?.remarks }}" name="remarks" class="form-control" id="remarks" cols="20" rows="10" placeholder="key in your student comments here..">
-            </textarea>
-         </div>
-           <div class="modal-footer">
-              <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-              <button (click)="onUpdateStudent(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
-           </div>
-        </form>
-     </div>
+                      <hr>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-</div>
-</div>
-<!-- Delete Student Modal -->
-<div class="modal fade" id="deleteStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+
+  <!-- Add Student Modal -->
+
+  <!-- Update Student Modal -->
+  <!-- <div class="modal fade" id="updateStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-     <div class="modal-content">
-        <div class="modal-header">
-           <h5 class="modal-title" id="deleteModelLabel">Delete Student</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-           </button>
-        </div>
-        <div class="modal-body">
-           <p>Are you sure you want to delete student: {{deleteStudent?.name}}?</p>
-           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              <button (click)="onDeleteStudent(deleteStudent!.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Student {{editStudent?.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="modal-body">
+          <form #editForm="ngForm">
+             <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" ngModel="{{editStudent?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+             </div>
+             <input type="hidden" ngModel="{{editStudent?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+             <input type="hidden" ngModel="{{editStudent?.studentCode}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
+             <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" ngModel="{{editStudent?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+             </div>
+             <div class="form-group">
+                <label for="Info">Class Info</label>
+                <input type="text" ngModel="{{editStudent?.classInfo}}" name="classInfo" class="form-control" id="jobTitle" placeholder="Info on this student">
+             </div>
+             <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" ngModel="{{editStudent?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+             </div>
+             <div class="form-group">
+                <label for="imageUrl">Image URL</label>
+                <input type="text" ngModel="{{editStudent?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
+             </div>
+             <div class="form-group">
+              <label for="remarks">Remarks:</label>
+              <textarea type="text" ngModel="{{ editStudent?.remarks }}" name="remarks" class="form-control" id="remarks" cols="20" rows="10" placeholder="key in your student comments here..">
+              </textarea>
            </div>
-        </div>
-     </div>
+             <div class="modal-footer">
+                <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                <button (click)="onUpdateStudent(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+             </div>
+          </form>
+       </div>
+    </div>
   </div>
-</div>
+  </div>
+  <!-- Delete Student Modal -->
+  <!--<div class="modal fade" id="deleteStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteModelLabel">Delete Student</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete student: {{deleteStudent?.name}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteStudent(deleteStudent!.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div> -->
 
-<!-- Notification when class is empty -->
-<div *ngIf="students?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO STUDENTS IN CURRENT CLASS..</h4>
-    <p>Please add new students above</p>
-  </div>
-  </div>
+  <!-- Notification when class is empty -->
+  <div *ngIf="students?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO STUDENTS IN CURRENT CLASS..</h4>
+      <p>Please add new students above</p>
+    </div>
+    </div>
+
+</body>
+</html>
 

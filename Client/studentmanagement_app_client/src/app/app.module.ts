@@ -32,8 +32,8 @@ const oktaConfig = Object.assign({
 const routes: Routes = [
   { path: 'login/callback', component: OktaCallbackComponent},
   { path: '', component: MainComponent },
-  { path: 'teachers', component: TeachersComponent}
-  { path: 'add', component: AddComponent, canActivate: [ OktaAuthGuard ]},
+  { path: 'teachers', component: TeachersComponent, canActivate: [ OktaAuthGuard ]},
+  { path: 'add', component: AddComponent},
   { path: 'login', component: LoginComponent},
   { path: '**', redirectTo: '', pathMatch: 'full'}
  ]
