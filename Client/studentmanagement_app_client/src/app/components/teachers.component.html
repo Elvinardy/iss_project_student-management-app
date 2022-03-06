@@ -1,34 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" style="color:white;">Student Management App</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarColor02">
-     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-           <button class="btn btn-danger"[routerLink]="['/add']" (click)="navigateToAdd()">Add New Student</button>
-        </li>
-     </ul>
-     <form class="form-inline my-2 my-lg-0">
-        <input type="search" (ngModelChange)="searchStudents(key.value)" #key="ngModel" ngModel
-         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search ..." required>
-     </form>
-  </div>
-</nav>
-<br>
 
+<app-header></app-header>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container" id="main-container">
     <div class="row">
       <!--creating a number of cards according to the number of students added or deleted-->
-        <div *ngFor="let stud of students" class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
+        <div *ngFor="let stud of students, let i = index" class="col-md-6 col-xl-3">
+            <div class="card m-b-30" id="student-card">
                 <div class="card-body row">
                     <div class="col-6">
                       <!--? for safe naviagation-->
-                        <a href=""><img src="{{ stud?.imageUrl }}" alt="" class="img-fluid rounded-circle w-60"></a>
+                        <a href=""><img src="{{ stud?.imageUrl }}" alt="" class="img-fluid rounded-circle w-60" id="student-img"></a>
                     </div>
-                    <div class="col-6 card-title align-self-center mb-0">
+                    <div class="col-6 card-title align-self-center mb-0" id="student-card">
                         <h5>{{ stud?.name }}</h5>
                         <p class="m-0">{{ stud?.classInfo }}</p>
                     </div>
@@ -46,16 +29,18 @@
                     <hr>
 
                     <form [formGroup]="form" (ngSubmit)="onAddAttendance()">
-                    <label for="attendance">Attendance:  </label>
-                    <input type="hidden" formControlName="id" value="{{ stud?.id }}">
-                    <select formControlName="atdInfo">
-                      <option value="present" selected>Present</option>
-                      <option value="absent">Absent</option>
-                      <option value="validReason">Valid-Reason</option>
-                    </select>
-                    <br>
-                      <label for="date">Date:   </label>
-                      <input type="date" formControlName="date">
+                    <input type="hidden" formControlName="id" id="id" [ngModel]='this.stud.id'>
+                    <div class="dropdown">
+                      <label for="attendance">Attendance:  </label>
+                      <select formControlName="atdInfo">
+                        <option value="present" selected>Present</option>
+                        <option value="absent">Absent</option>
+                        <option value="validReason">Valid-Reason</option>
+                      </select>
+                      <br>
+                    </div>
+
+                      <input type="date" formControlName="date" >
                       <button type="submit">Submit</button>
                     </form>
                 </div>

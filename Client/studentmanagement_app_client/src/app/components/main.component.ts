@@ -11,7 +11,7 @@ import { StudentService } from '../student.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit  {
 
   students: Student[] = [];
   attendance: Attendance[] =[];
@@ -106,9 +106,7 @@ export class MainComponent implements OnInit, OnDestroy {
     }
   }
 
-  navigateToAdd() {
-    this.router.navigate(['/add'])
-  }
+
   // for Bootstrap Modal functionality
   public onOpenModal(mode: String, students: Student): void {
     const container = document.getElementById('main-container');
@@ -131,8 +129,8 @@ export class MainComponent implements OnInit, OnDestroy {
     button.click();
 }
 
-ngOnDestroy(): void {
+/* ngOnDestroy(): void {
   this.subscription.unsubscribe();
-}
+} */
 
 }

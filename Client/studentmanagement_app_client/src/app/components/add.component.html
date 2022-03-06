@@ -5,23 +5,31 @@
   <form #addForm="ngForm" (ngSubmit)="onAddStudent(addForm)">
   <div class="form-group">
      <label for="name">Name</label>
-     <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+     <input type="text" ngModel name="name" class="form-control" id="name"
+     placeholder="Name" required minlength="3">
+     <div class="invalid-feedback">
+      Please enter student name: *
+    </div>
   </div>
   <div class="form-group">
-     <label for="email">Email Address:</label>
-     <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+     <label for="email">Email Address: *</label>
+     <input type="email" ngModel name="email" class="form-control" id="email"
+     placeholder="@students.edu.sg" required>
   </div>
   <div class="form-group">
-     <label for="info">Class Information:</label>
-     <input type="text" ngModel name="classInfo" class="form-control" id="classinfo" placeholder="Class info" required>
+     <label for="info">Class Information: *</label>
+     <input type="text" ngModel name="classInfo" class="form-control" id="classinfo"
+     placeholder="Class info" required>
   </div>
   <div class="form-group">
      <label for="phone">Phone:</label>
-     <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="+65" required>
+     <input type="text" ngModel name="phone" class="form-control" id="phone"
+     placeholder="+65" required>
   </div>
   <div class="form-group">
      <label for="imageUrl">Image URL:</label>
-     <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL" required>
+     <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl"
+     placeholder="Image URL" required>
   </div>
   <!--<label for="attendance" ngModel name="attendance">Attendance: </label>
   <div class="form-check">
@@ -45,6 +53,7 @@
   <div class="modal-footer">
      <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
      <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Add Student</button>
+     <strong>*</strong> These fields are required.
   </div>
   </form>
 </div>

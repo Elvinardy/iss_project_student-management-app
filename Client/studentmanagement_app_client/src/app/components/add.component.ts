@@ -55,6 +55,7 @@ export class AddComponent implements OnInit {
       error:(error: HttpErrorResponse) => {
         // to modify error message later
         alert(error.message);
+        console.log("An error occured!");
         addForm.reset();
 
       }
@@ -62,7 +63,7 @@ export class AddComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate([''])
+    this.router.navigate(['/teachers'])
   }
 
 }

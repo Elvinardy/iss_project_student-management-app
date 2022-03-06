@@ -1,3 +1,6 @@
+h4 {
+  font-family: 'Roboto', sans-serif;
+}
 
 .security-btn{
   position:relative;
@@ -17,7 +20,31 @@
   transform: translateY(30%);
   -ms-transform: translateX(-200%);
     transform: translateX(-200%);
+  cursor: pointer;
+  }
+  .security-btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
 
+  .security-btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .security-btn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .security-btn:hover span {
+    padding-right: 25px;
   }
 
   .security-btn-ml-1{
@@ -45,7 +72,7 @@
   display:-webkit-flex;
   display:-moz-box;
   display:-ms-flexbox;
-  display:flex
+
 }
 
 .login-status-user-info{

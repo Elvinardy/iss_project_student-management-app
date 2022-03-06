@@ -3,35 +3,38 @@ package com.student_management_app.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "attendance")
-
+@Table(name = "attendance_info")
 public class Attendance implements Serializable {
   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="atd_id")
-    private Long atdId;
+    private long atdId;
 
-    @ManyToOne
-    @JoinColumn(name="student_id", nullable = false)
-    private Student student;
-
-   
     @Column(name="date")
     private Date date;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="atd_info")
     private AtdInfo atdInfo;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="stud_id", nullable = false)
+    private Student student;
 
     public Attendance() {
     }
@@ -57,13 +60,13 @@ public class Attendance implements Serializable {
         this.atdId = atdId;
     }
 
- /*    public Student getStudent() {
+    public Student getStudent() {
         return student;
     }
 
     public void setStudent(Student student) {
         this.student = student;
-    } */
+    } 
 
     public AtdInfo getAtdInfo() {
         return atdInfo;

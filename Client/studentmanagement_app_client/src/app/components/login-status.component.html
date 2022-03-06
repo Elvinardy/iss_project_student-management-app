@@ -1,13 +1,17 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
+  </style>
 <div class="login-status-header">
 
   <div *ngIf="isAuthenticated && userFullName" class="login-status-user-info">
     <h4>Welcome Back {{ userFullName }}.</h4>
   </div>
-  
-  <button *ngIf="!isAuthenticated" routerLink="/login"
-   class="security-btn">Login</button>
 
-   <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn" routerLink="/teachers">LogOut</button>
+  <button *ngIf="!isAuthenticated" routerLink="/login"
+   class="security-btn"><span>Login</span></button>
+
+   <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn"
+   routerLink="/teachers">LogOut</button>
 
 <!--    <button *ngIf="isAuthenticated" routerLink="/teachers" class="security-btn ml-1"></button> -->
 

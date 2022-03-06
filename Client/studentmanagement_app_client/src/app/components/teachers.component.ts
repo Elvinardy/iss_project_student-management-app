@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -19,6 +20,9 @@ export class TeachersComponent implements OnInit, OnDestroy {
   deleteStudent!: Student;
   subscription!: Subscription
   form!: FormGroup;
+  date!: Date;
+
+
 
 
   constructor(private studentService: StudentService,
@@ -34,6 +38,10 @@ export class TeachersComponent implements OnInit, OnDestroy {
     })
   }
 
+/*   formatDate(){
+    this.date=new Date();
+    let latest_date =this.datePipe.transform(this.date, 'yyyy-MM-dd');
+   } */
 
   public getStudents(): void {
     document.getElementById('add-student-form')?.click();
@@ -44,6 +52,7 @@ export class TeachersComponent implements OnInit, OnDestroy {
       },
       error:(error: HttpErrorResponse) => {
           alert(error.message);
+          console.log("An error occured!")
       }
     }
       )
@@ -73,11 +82,12 @@ export class TeachersComponent implements OnInit, OnDestroy {
         alert(error.message);
       }
     });
-    this.router.navigate(['/']);
+    this.router.navigate(['/teachers']);
   }
 
   onAddAttendance() {
     const attd = this.form.value as Attendance;
+    document.getElementById('id');
     // this.students.push(id);
     this.studentService.postAttendance(attd)
       .then(() => console.log(attd))

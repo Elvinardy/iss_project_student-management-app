@@ -21,6 +21,8 @@ import {
 
 import myAppConfig from './config/my-app-config';
 import { TeachersComponent } from './components/teachers.component';
+import { HeaderComponent } from './components/header.component';
+import { EmailComponent } from './components/email.component';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (oktaAuth, injector) => {
@@ -33,9 +35,10 @@ const routes: Routes = [
   { path: 'login/callback', component: OktaCallbackComponent},
   { path: '', component: MainComponent },
   { path: 'teachers', component: TeachersComponent, canActivate: [ OktaAuthGuard ]},
-  { path: 'add', component: AddComponent},
+  { path: 'add', component: AddComponent, canActivate: [ OktaAuthGuard ]},
   { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo: '', pathMatch: 'full'}
+  { path: 'mail', component: EmailComponent},
+  { path: '**', redirectTo: 'login', pathMatch: 'full'}
  ]
 
 @NgModule({
@@ -45,7 +48,9 @@ const routes: Routes = [
     AddComponent,
     LoginComponent,
     LoginStatusComponent,
-    TeachersComponent
+    TeachersComponent,
+    HeaderComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,

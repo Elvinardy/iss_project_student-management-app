@@ -14,4 +14,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     void deleteStudentById(Long id);
     // query method in Spring
     Optional<Student> findStudentById(Long id);
+/* 
+    Optional<Student> findStudentByUser(); */
 }

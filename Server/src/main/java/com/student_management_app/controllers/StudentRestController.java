@@ -24,9 +24,9 @@ public class StudentRestController {
     @Autowired
     StudentService studentSvc;
 
-    public StudentRestController(StudentService studentSvc) {
+   /*  public StudentRestController(StudentService studentSvc) {
         this.studentSvc = studentSvc;
-    }
+    } */
 
     // get all students
     @GetMapping("/all")

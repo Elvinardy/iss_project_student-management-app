@@ -33,8 +33,8 @@ export class LoginStatusComponent implements OnInit {
             );
       }
       }
-      logout() {
-        this.oktaAuthService.signOut();
+      public async logout(): Promise<void> {
+        await this.oktaAuthService.signOut();
     }
 
 }

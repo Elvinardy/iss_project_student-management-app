@@ -1,0 +1,7 @@
+#student-img {
+  transition: transform .2s;
+}
+
+#student-img:hover {
+  transform: scale(1.4);
+}

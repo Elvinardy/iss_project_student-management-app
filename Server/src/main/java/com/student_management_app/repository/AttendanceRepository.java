@@ -1,16 +1,15 @@
 package com.student_management_app.repository;
 
 import com.student_management_app.model.Attendance;
-import com.student_management_app.model.Student;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AttendanceRepository {
+public interface AttendanceRepository extends JpaRepository<Attendance, Long>{
 
-    @Autowired
+    
+/*    @Autowired
     private JdbcTemplate template;
 
     public static final String SQL_ADD_ATTENDANCE = 
@@ -19,5 +18,5 @@ public class AttendanceRepository {
     public void insertAttendance(Attendance attendance, Student student) {
         template.update(SQL_ADD_ATTENDANCE, attendance.getDate(),
         attendance.getAtdInfo().toString(), student.getStudentCode());
-    }
+    } */
 }
