@@ -1,4 +1,4 @@
-/* package com.student_management_app.config;
+/* ackage com.student_management_app.config;
 
 import java.nio.charset.StandardCharsets;
 

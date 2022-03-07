@@ -20,14 +20,13 @@ public class EmailSend {
         super();
         this.name = name;
         this.email = email;
-        this.message = message;
+        this.subject = message;
         this.message = message;
     }
 
     public EmailSend() {
     }
 
-    
     public String getSubject() {
         return subject;
     }

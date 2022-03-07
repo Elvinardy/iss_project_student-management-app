@@ -4,8 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentService } from './student.service';
 import { MainComponent } from './components/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -70,8 +69,9 @@ const routes: Routes = [
     }), */
   ],
 
-  providers: [StudentService, { provide: OKTA_CONFIG, useValue: oktaConfig }]
-              /* { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}] */,
+  providers: [StudentService, { provide: OKTA_CONFIG, useValue: oktaConfig },
+             // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+            ],
               // token for HTTP interceptors
               // mulit: true cos we can have multiple interceptors
   bootstrap: [AppComponent]

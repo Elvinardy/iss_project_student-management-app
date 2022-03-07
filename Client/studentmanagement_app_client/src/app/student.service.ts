@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { Mail, MailResponse } from './Mail';
+import { Quote } from './quote';
 import { Attendance, Student } from './student';
 
 @Injectable()
@@ -45,13 +46,17 @@ postAttendance(attendance: Attendance): Promise<void> {
       return this.student.id
     })))
 } */
-
+// to send email out
 sendEmail(email: Mail): Promise<MailResponse> {
   console.log(email.message)
   return lastValueFrom(
     this.http.post<MailResponse>(`/student/sendemail`, email)
   )
-
+}
+// getting random quote of the day
+getQuote(): Promise<Quote> {
+  const headers = new HttpHeaders().set('Content-Type', 'application/json');
+  return lastValueFrom(this.http.get<Quote>(`/student/quote`));
 }
 
 }

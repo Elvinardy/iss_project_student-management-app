@@ -21,12 +21,13 @@ export class TeachersComponent implements OnInit, OnDestroy {
   subscription!: Subscription
   form!: FormGroup;
   date!: Date;
+  quote!:string
 
 
 
 
   constructor(private studentService: StudentService,
-    private router: Router, private fb: FormBuilder) { }
+    private router: Router, private fb: FormBuilder, private studentSvc: StudentService) { }
 
   ngOnInit(): void {
     this.getStudents();
@@ -36,6 +37,9 @@ export class TeachersComponent implements OnInit, OnDestroy {
       date: this.fb.control(now),
       atdInfo: this.fb.control('present'),
     })
+    this.studentService.getQuote().then(
+      q => this.quote = q.quote
+    );
   }
 
 /*   formatDate(){
@@ -139,6 +143,9 @@ export class TeachersComponent implements OnInit, OnDestroy {
 
     container?.appendChild(button);
     button.click();
+}
+displayQuote() {
+
 }
 
 ngOnDestroy(): void {

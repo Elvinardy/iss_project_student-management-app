@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "attendance_info")
+@Table(name = "attendance")
 public class Attendance implements Serializable {
   
     @Id
@@ -33,7 +33,7 @@ public class Attendance implements Serializable {
     private AtdInfo atdInfo;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="id", nullable = false)
+    @JoinColumn(name="stud_id", nullable = false)
     private Student student;
 
    

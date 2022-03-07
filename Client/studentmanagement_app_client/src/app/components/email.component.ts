@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,8 +20,9 @@ export class EmailComponent implements OnInit{
   {
     name: '',
     email: '',
-    subject:'',
-    message: ''
+    subject: '',
+    message: '',
+
   };
 
   mailSend!: string
@@ -30,9 +31,22 @@ export class EmailComponent implements OnInit{
     private router: Router) { }
 
   ngOnInit(): void {
-
+    this.getStudents();
   }
 
+  public getStudents(): void {
+    this.subscription = this.studentSvc.getStudents().subscribe({
+      next:(response: Student[]) => {
+        this.students = response;
+        console.log(response);
+      },
+      error:(error: HttpErrorResponse) => {
+          alert(error.message);
+          console.log("An error occured!")
+      }
+    }
+      )
+}
 /*   onSubmit(){
     this.http.post<Details>(`/sendmail`, this.dataset).subscribe(
         res => {

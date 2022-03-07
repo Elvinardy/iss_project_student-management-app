@@ -16,7 +16,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
     // only add an access token for secured endpoints
-    const securedEndpoints = ['http://localhost:8080/student/'];
+    const securedEndpoints = ['/student/'];
 
     if(securedEndpoints.some(url => request.urlWithParams.includes(url))) {
       // to get access token
@@ -33,4 +33,5 @@ export class AuthInterceptorService implements HttpInterceptor {
     }
     return await lastValueFrom(next.handle(request));
   }
-} */
+}
+ */
