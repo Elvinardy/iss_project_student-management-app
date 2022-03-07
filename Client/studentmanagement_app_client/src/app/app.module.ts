@@ -63,10 +63,7 @@ const routes: Routes = [
     OktaAuthModule,
     FormsModule, ReactiveFormsModule, NgbModule,
     RouterModule.forRoot(routes),
-   /*  CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }), */
+
   ],
 
   providers: [StudentService, { provide: OKTA_CONFIG, useValue: oktaConfig },

@@ -52,7 +52,7 @@ public class QuotesService {
         JsonObject responseJson = Json.createObjectBuilder(
                 Json.createReader(inputStream)
                         .readObject())
-                .build();
+                        .build();
 
         JsonObject contents = responseJson.get("contents").asJsonObject();
         System.out.println("quote array>>> " + contents);

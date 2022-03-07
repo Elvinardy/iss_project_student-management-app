@@ -25,6 +25,10 @@ body {
 
 }
 
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
 .footer {
   position: fixed;
   left: 0;
