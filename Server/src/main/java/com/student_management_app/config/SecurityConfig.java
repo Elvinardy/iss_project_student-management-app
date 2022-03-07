@@ -3,18 +3,19 @@
 import com.okta.spring.boot.oauth.Okta;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpEntity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Override
-    protected void configure(HttpEntity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         // to protect the endpoint /api/student
 
         http.authorizeRequests()
-            .antMatchers("/student/**")
+            .antMatchers("/teachers/**")
             .authenticated()
             .and()
             .oauth2ResourceServer()

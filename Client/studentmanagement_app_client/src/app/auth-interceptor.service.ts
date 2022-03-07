@@ -1,4 +1,4 @@
-/* import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 import { from, lastValueFrom, Observable } from 'rxjs';
@@ -34,4 +34,4 @@ export class AuthInterceptorService implements HttpInterceptor {
     return await lastValueFrom(next.handle(request));
   }
 }
- */
+

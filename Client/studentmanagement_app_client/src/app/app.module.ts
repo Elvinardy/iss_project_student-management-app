@@ -23,6 +23,7 @@ import myAppConfig from './config/my-app-config';
 import { TeachersComponent } from './components/teachers.component';
 import { HeaderComponent } from './components/header.component';
 import { EmailComponent } from './components/email.component';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 
 
@@ -67,7 +68,7 @@ const routes: Routes = [
   ],
 
   providers: [StudentService, { provide: OKTA_CONFIG, useValue: oktaConfig },
-             // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+             { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
             ],
               // token for HTTP interceptors
               // mulit: true cos we can have multiple interceptors
