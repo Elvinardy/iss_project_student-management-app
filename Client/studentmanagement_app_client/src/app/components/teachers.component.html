@@ -1,6 +1,7 @@
 
 <app-header></app-header>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<body>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container" id="main-container">
     <div class="row">
       <!--creating a number of cards according to the number of students added or deleted-->
@@ -12,7 +13,7 @@
                         <a href=""><img src="{{ stud?.imageUrl }}" alt="" class="img-fluid rounded-circle w-60" id="student-img"></a>
                     </div>
                     <div class="col-6 card-title align-self-center mb-0" id="student-card">
-                        <h5>{{ stud?.name }}</h5>
+                        <h5 class="student-name">{{ stud?.name }}</h5>
                         <p class="m-0">{{ stud?.classInfo }}</p>
                     </div>
                 </div>
@@ -48,6 +49,9 @@
         </div>
     </div>
 </div>
+
+</body>
+
 
 <!-- Add Student Modal -->
 

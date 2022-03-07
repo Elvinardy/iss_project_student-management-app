@@ -13,7 +13,7 @@ import { StudentService } from '../student.service';
 })
 export class AddComponent implements OnInit {
 
-  public students: Student[] = [];
+  students: Student[] = [];
   subscription!: Subscription;
   form!: FormGroup;
 
@@ -50,7 +50,7 @@ export class AddComponent implements OnInit {
         console.log(response);
         this.getStudents();
         addForm.reset();
-        this.router.navigate([''])
+        this.router.navigate(['/teachers'])
       },
       error:(error: HttpErrorResponse) => {
         // to modify error message later

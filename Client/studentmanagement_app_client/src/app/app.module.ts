@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { StudentService } from './student.service';
 import { MainComponent } from './components/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,6 +25,9 @@ import { TeachersComponent } from './components/teachers.component';
 import { HeaderComponent } from './components/header.component';
 import { EmailComponent } from './components/email.component';
 
+
+
+
 const oktaConfig = Object.assign({
   onAuthRequired: (oktaAuth, injector) => {
     const router = injector.get(Router);
@@ -37,7 +41,7 @@ const routes: Routes = [
   { path: 'teachers', component: TeachersComponent, canActivate: [ OktaAuthGuard ]},
   { path: 'add', component: AddComponent, canActivate: [ OktaAuthGuard ]},
   { path: 'login', component: LoginComponent},
-  { path: 'mail', component: EmailComponent},
+  { path: 'mail', component: EmailComponent, canActivate: [ OktaAuthGuard ]},
   { path: '**', redirectTo: 'login', pathMatch: 'full'}
  ]
 
@@ -50,7 +54,8 @@ const routes: Routes = [
     LoginStatusComponent,
     TeachersComponent,
     HeaderComponent,
-    EmailComponent
+    EmailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -59,8 +64,16 @@ const routes: Routes = [
     OktaAuthModule,
     FormsModule, ReactiveFormsModule, NgbModule,
     RouterModule.forRoot(routes),
+   /*  CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }), */
   ],
-  providers: [StudentService, { provide: OKTA_CONFIG, useValue: oktaConfig }],
+
+  providers: [StudentService, { provide: OKTA_CONFIG, useValue: oktaConfig }]
+              /* { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}] */,
+              // token for HTTP interceptors
+              // mulit: true cos we can have multiple interceptors
   bootstrap: [AppComponent]
 })
 export class AppModule { }

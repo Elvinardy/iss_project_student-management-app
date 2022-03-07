@@ -33,15 +33,18 @@ public class Attendance implements Serializable {
     private AtdInfo atdInfo;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="stud_id", nullable = false)
+    @JoinColumn(name="id", nullable = false)
     private Student student;
 
+   
     public Attendance() {
     }
 
-    public Attendance(Date date, AtdInfo atdInfo) {
+    public Attendance(long atdId, Date date, AtdInfo atdInfo, Student student) {
+        this.atdId = atdId;
         this.date = date;
         this.atdInfo = atdInfo;
+        this.student = student;
     }
 
     public Date getDate() {
@@ -76,4 +79,12 @@ public class Attendance implements Serializable {
         this.atdInfo = atdInfo;
     }
 
+    @Override
+    public String toString() {
+        return "Attendance {" +
+                "id=" + atdId +
+                ", atd_info='" + atdInfo + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

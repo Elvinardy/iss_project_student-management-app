@@ -24,7 +24,7 @@ public class AttendanceService {
         student.getId();
         return attRepo.save(attendance);
     } 
-
+     
 
     }
 

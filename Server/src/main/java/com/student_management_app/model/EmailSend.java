@@ -11,22 +11,31 @@ public class EmailSend {
     @GeneratedValue
     private Long id;
     private String name;
+    private String email;
     private String subject;
-    private String emailAddress;
     private String message;
 
     
-    public EmailSend(String name, String subject, String emailAddress, String message) {
+    public EmailSend(String name, String email, String message, String subject) {
         super();
         this.name = name;
-        this.subject = subject;
-        this.emailAddress = emailAddress;
+        this.email = email;
+        this.message = message;
         this.message = message;
     }
 
     public EmailSend() {
     }
+
     
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,17 +50,12 @@ public class EmailSend {
     public void setName(String name) {
         this.name = name;
     }
-    public String getSubject() {
-        return subject;
+
+    public String getEmail() {
+        return email;
     }
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
     public String getMessage() {
         return message;

@@ -31,10 +31,26 @@ public class Student implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
     private Attendance attendance;
 
+    /* @ManyToOne
+    @JoinColumn(name="class_id")
+    private User user; */
     // Empty Constructor
     public Student() { }
     
-    // Constructor
+    public Student(String name, String email, String classInfo, String remarks, String phone, String imageUrl,
+            String studentCode, Attendance attendance) {
+        this.name = name;
+        this.email = email;
+        this.classInfo = classInfo;
+        this.remarks = remarks;
+        this.phone = phone;
+        this.imageUrl = imageUrl;
+        this.studentCode = studentCode;
+        this.attendance = attendance;
+    
+    }
+
+ /*    // Constructor
     public Student(String name, String email, String classInfo, String remarks, String phone, String imageUrl, String studentCode) {
         super();
         this.name = name;
@@ -44,7 +60,7 @@ public class Student implements Serializable {
         this.phone = phone;
         this.imageUrl = imageUrl;
         this.studentCode = studentCode;
-    }
+    } */
 
     public Long getId() {
         return id;
@@ -104,7 +120,17 @@ public class Student implements Serializable {
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
     }
+/* 
+    
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+ */
     @Override
     public String toString() {
         return "Student{" +

@@ -1,3 +1,25 @@
+<!-- <h1>Enter the following details</h1>
+<table>
+  <tr>
+    <td><span>Name</span></td>
+    <td><input type="text" [(ngModel)]="dataset.name" name="name"></td>
+  </tr>
+  <tr>
+    <td><span>Message</span></td>
+    <td><input type="text" [(ngModel)]="dataset.message" name="message"></td>
+  </tr>
+  <tr>
+    <td><span>Send Email to</span></td>
+    <td><input type="text" [(ngModel)]="dataset.email" name="email">
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><button (click)="onSubmit()">Submit</button></td>
+  </tr>
+</table>
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,16 +45,23 @@
               <div class="col-md-6" >
                   <div class="form-group">
                       <label for="form_email">Email Address *</label>
-                      <input [(ngModel)]="emailNotification.email" id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                      <input [(ngModel)]="emailNotification.email" id="form_email" type="email" name="email" class="form-control" placeholder="Please enter email addeess *" required="required" data-error="Valid email is required.">
                       <div class="help-block with-errors"></div>
                   </div>
               </div>
+              <div class="col-md-6" >
+                <div class="form-group">
+                    <label for="form_email">Subject *</label>
+                    <input [(ngModel)]="emailNotification.subject" id="form_email" type="email" name="email" class="form-control" placeholder="Please enter email addeess *" required="required" data-error="Valid email is required.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
               <hr>
               <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_need">Please Type in your message here: </label>
                     <br>
-                        <textarea name="message" id="form-message" cols="50" rows="10" required="required" data-error="Please type your message here.">
+                        <textarea [(ngModel)]="emailNotification.message" name="message" id="form-message" cols="50" rows="10" required="required" data-error="Please type your message here.">
                         </textarea>
                     <div class="help-block with-errors"></div>
                 </div>

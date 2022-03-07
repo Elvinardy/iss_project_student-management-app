@@ -1,6 +1,10 @@
 export interface Mail {
+  name:string;
+  message:string;
+  subject:string;
+  email:string;
+}
 
-  name: string;
-  email: string;
-  message: string;
+export interface MailResponse {
+  message:string;
 }

@@ -5,3 +5,24 @@
 #student-img:hover {
   transform: scale(1.4);
 }
+
+.student-name {
+  transition: transform .2s;
+}
+
+.student-name:hover {
+  transform: scale(1.4);
+}
+
+body {
+  height: 10%;
+  background-image: url('src/assets/images/background.jpg');
+  background-size: cover;
+  -webkit-transition:all .5s ease;
+  -o-transition:all .5s ease;
+  -moz-transition:all .5s ease;
+  transition:all .5s ease
+
+
+}
+

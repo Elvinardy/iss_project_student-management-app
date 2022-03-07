@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { isConstructSignatureDeclaration } from 'typescript';
+import { Mail, MailResponse } from './Mail';
 import { Attendance, Student } from './student';
 
 @Injectable()
@@ -35,7 +35,7 @@ student!: Student;
 }  */
 postAttendance(attendance: Attendance): Promise<void> {
   return lastValueFrom(
-    this.http.post<void>('student/attendance', attendance));
+    this.http.post<void>('/student/attendance', attendance));
 }
 
 /* public postAttendanceWithId(): Observable<Attendance> {
@@ -45,5 +45,13 @@ postAttendance(attendance: Attendance): Promise<void> {
       return this.student.id
     })))
 } */
+
+sendEmail(email: Mail): Promise<MailResponse> {
+  console.log(email.message)
+  return lastValueFrom(
+    this.http.post<MailResponse>(`/student/sendemail`, email)
+  )
+
+}
 
 }
