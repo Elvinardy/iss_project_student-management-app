@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
    // for search function
-   public searchStudents(key: String): void {
+   searchStudents(key: String): void {
     console.log(key);
     const results: Student[] = [];
     for (const student of this.students) {
